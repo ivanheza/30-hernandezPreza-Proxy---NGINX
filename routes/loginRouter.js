@@ -2,6 +2,7 @@ import express from "express"
 import passport from "passport"
 import Users from "../models/userMongo.js"
 import isAuthenticated from "../utils/middleWareAuth.js"
+import logger from "../winston.js"
 
 const router = express.Router()
 
@@ -11,6 +12,8 @@ let msg
 ///////////---- Home
 
 router.get("/home", isAuthenticated, (req, res) => {
+   const {url, method} = req
+   logger.info(`Metodo: ${method} - Ruta: ${url}`)
    ///---- se pasa el valor de la variable user para hacer uso de la informacion del usuario
    registro = true
 
@@ -26,11 +29,15 @@ router.get("/home", isAuthenticated, (req, res) => {
    }
 })
 router.get("/", (req, res) => {
+   const {url, method} = req
+   logger.info(`Metodo: ${method} - Ruta: ${url}`)
    ///---- nos redirige a la pagina home, en caso de no tener autorización nos lleva a login
    res.redirect("/home")
 })
 
 router.get("/login", (req, res) => {
+   const {url, method} = req
+   logger.info(`Metodo: ${method} - Ruta: ${url}`)
    //console.log(req.session)
 
    ///---- Login: se verifica si el usuario esta utenticado y se redirecciona al home
@@ -56,12 +63,16 @@ router.get(
 )
 
 router.get("/login/error", (req, res) => {
+   const {url, method} = req
+   logger.info(`Metodo: ${method} - Ruta: ${url}`)
    let scripts = [{script: "/setTimeout.js"}]
    res.render("log-error", {scripts})
 })
 ///////////---- Logout!
 
 router.get("/logout", isAuthenticated, (req, res) => {
+   const {url, method} = req
+   logger.info(`Metodo: ${method} - Ruta: ${url}`)
    ///------- Se definió una variable scripts para cargar el script set timeout y redirigir la pagina, se envia a la hora de hacer render del hbs
    let scripts = [{script: "/setTimeout.js"}]
    ///---- se utiliza el req. session para terminar la sesion.

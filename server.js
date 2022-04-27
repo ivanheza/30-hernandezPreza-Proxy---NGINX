@@ -18,7 +18,10 @@ import mensajesSocket from "./routes/web-sockets/wsMensajes.js"
 import connectDB from "./utils/getMongo.js"
 
 ///////------ Configuración Passport
-import "./passport-facebook.js"
+import "./middleware/passport-facebook.js"
+
+////--- WINSTON
+import logger from "./winston.js"
 
 ///----------- Cluster Inicio
 import config from "./config.js"
@@ -96,6 +99,9 @@ if (cluster.isPrimary && serverMode == "CLUSTER") {
    app.use(loginRouter)
 
    app.get("*", (req, res) => {
+      const {url, method} = req
+
+      logger.warn(`Ruta ${method} ${url} no implementada`)
       res.status(400).json({error: 0, descripcion: "La ruta que buscas no existe"})
    })
    ///

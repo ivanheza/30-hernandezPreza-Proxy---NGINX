@@ -5,8 +5,12 @@ const router = express.Router()
 
 import ProductosApi from "../models/productos.js"
 import config from "../config.js"
+import {generarNumeros} from "../process-child.js"
+import logger from "../winston.js"
 
 router.get("/productos-test", async (req, res) => {
+   const {url, method} = req
+   logger.info(`Metodo: ${method} - Ruta: ${url}`)
    ///---- se genera los Mocks
    const productosNuevos = generarProductos(5)
 
@@ -19,28 +23,31 @@ router.get("/productos-test", async (req, res) => {
    res.redirect("/home")
 })
 
-////---- desafío Process OBJECT
+////--------
+////-------- desafío Process OBJECT
 
 router.get("/randoms", async (req, res) => {
+   const {url, method} = req
+   logger.info(`Metodo: ${method} - Ruta: ${url}`)
    ///---- se genera los Mocks
-   let cant = req.query.cant
-   const forked = fork("process-child.js")
 
-   if (cant) {
-      console.log("process by query")
-      forked.on("message", (data) => {
-         res.send(data)
-      })
-      console.log(
-         `Servidor express escuchando en el puerto ${config.minimist_PORT} - PID WORKER ${process.pid}`
-      )
-      forked.send(cant)
+   //
+   let cant = req.query.cant
+   //const forked = fork("process-child.js")
+   if (!cant) {
+      const numeros = generarNumeros(1000000)
+      const duplicated = numeros.reduce((acc, value) => {
+         return {...acc, [value]: (acc[value] || 0) + 1}
+      }, {})
+      console.log("first")
+      res.send(duplicated)
    } else {
-      console.log("processDefault")
-      forked.on("message", (data) => {
-         res.send(data)
-      })
-      forked.send(1000000)
+      console.log(cant, "cantidad")
+      const numeros = generarNumeros(cant)
+      const duplicated = numeros.reduce((acc, value) => {
+         return {...acc, [value]: (acc[value] || 0) + 1}
+      }, {})
+      res.send(duplicated)
    }
 })
 

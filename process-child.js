@@ -2,7 +2,7 @@ const generarRandom = (min, max) => {
    return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
-const generarNumeros = (cant) => {
+export const generarNumeros = (cant) => {
    let randomNumbers = []
    for (let i = 1; i <= cant; i++) {
       const randomNumber = generarRandom(1, 1000)
@@ -18,3 +18,20 @@ process.on("message", (cant) => {
    }, {})
    process.send(duplicated)
 })
+
+/* if (cant) {
+   console.log("process by query")
+   forked.on("message", (data) => {
+      res.send(data)
+   })
+   console.log(
+      `Servidor express escuchando en el puerto ${config.minimist_PORT} - PID WORKER ${process.pid}`
+   )
+   forked.send(cant)
+} else {
+   console.log("processDefault")
+   forked.on("message", (data) => {
+      res.send(data)
+   })
+   forked.send(1000000)
+} */
