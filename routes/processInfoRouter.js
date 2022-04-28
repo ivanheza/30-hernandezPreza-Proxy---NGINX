@@ -29,8 +29,6 @@ router.get("/", (req, res) => {
       PORT: PUERTO,
    }
 
-   console.log("size ", p.length)
-
    res.render("process-info", {p, user})
 })
 ////---- Ruta con el middleware Compression()

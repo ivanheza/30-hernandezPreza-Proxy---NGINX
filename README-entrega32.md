@@ -28,11 +28,12 @@ La funcionalidad del proyecto no cambio, solo se agregaron las nuevas instruccio
 *  node --prof server.js
 *  curl -X GET "http://localhost:9000/info"
 *  artillery quick --count 20 -n 50 "http://localhost:9000/info" > result-info.txt
-*  node --prof-process isolate-0x7febab600000-11498-v8.log > processed.txt
+*  node --prof-process isolate-0x7febab600000-11498-v8.log > info_processed.txt
+*  node --prof-process isolate-0x7fe834f00000-12811-12811-v8.log > 0x.txt
 
-## Conclusión Performance
+-  Autocannon npm run 0x
 
-––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+   ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
 ### Main Dependencies
 
