@@ -1,4 +1,4 @@
-# Desafío SERVIDOR DE BALANCE CON CARGAS
+# DESAFÍO LOGGERS, GZIP y ANÁLISIS DE PERFORMANCE
 
 -  Acceder al proyecto en la dirección **http://localhost:9000**
 
