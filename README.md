@@ -1,4 +1,4 @@
-# DESAFÍO LOGGERS, GZIP y ANÁLISIS DE PERFORMANCE
+# DESAFÍO ARQUITECTURA DE CAPAS
 
 -  Acceder al proyecto en la dirección **http://localhost:9000**
 
@@ -7,11 +7,7 @@ La funcionalidad del proyecto no cambio, solo se agregaron las nuevas instruccio
 
 ## Consignas
 
-### Compression
-
--  Se verificó la ruta /info e info/zip:
-
-*  en la carpeta \_imagenesTarea se adjuntan las evidencias.
+-  Se agrupó el proyecto en capas de ruteo, controlador, lógica y persistencia.
 
 ### Loggueo
 
@@ -20,20 +16,6 @@ La funcionalidad del proyecto no cambio, solo se agregaron las nuevas instruccio
 *  info: se muestra por consola
 *  warn: en el archivo warn.log
 *  error: en el archivo error.log "Solo errores del manejo de WebSockets"
-
-### Node built-in profiler "Se desactivo el process.child de la ruta /api/randoms"
-
--  Perfilamiento Prof Process
-
-*  node --prof server.js
-*  curl -X GET "http://localhost:9000/info"
-*  artillery quick --count 20 -n 50 "http://localhost:9000/info" > result-info.txt
-*  node --prof-process isolate-0x7febab600000-11498-v8.log > info_processed.txt
-*  node --prof-process isolate-0x7fe834f00000-12811-12811-v8.log > 0x.txt
-
--  Autocannon npm run 0x
-
-   ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
 ### Main Dependencies
 
